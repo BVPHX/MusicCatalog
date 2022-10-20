@@ -1,0 +1,170 @@
+﻿<Window x:Class="MusicCatalog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicCatalog"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="503" Width="800">
+    <Grid>
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Файл"></MenuItem>
+
+        </Menu>
+        <TabControl Margin="0,18,0,10">
+            <TabItem Header="Исполнители">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="artistsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding ArtistOrGroupName}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Начало карьеры" Binding="{Binding CareerBegin, StringFormat=d}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Конец карьеры" Binding="{Binding CareerEnd, StringFormat=d}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Количество альбомов" Binding="{Binding AlbumsNumber}" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Grid.Row="1" Header="Редактирование">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="5">
+
+                                <Button Content="Добавить" Margin="2"></Button>
+                                <Button Content="Изменить" Margin="2"></Button>
+                                <Button Content="Удалить" Margin="2"></Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="Название исполнителя/группы" Margin="2"></Label>
+                                <TextBox x:Name="artistNameBox" Margin="2" ></TextBox>
+                                <DatePicker x:Name="careerStartPicker" Margin="2"></DatePicker>
+                                <DatePicker x:Name="careerEndPicker" Margin="2"></DatePicker>
+                                <Label Content="Количество альбомов"/>
+                                <TextBox x:Name="albumsCountBox"/>
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+
+            </TabItem>
+            <TabItem Header="Состав команд">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="membersGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя участника" Binding="{Binding MemberName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Группа участника" Binding="{Binding GroupOfMemberName}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Header="Редактирование" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Добавить" Grid.Row="0" Margin="5"></Button>
+                            <Button Content="Изменить" Grid.Row="1" Margin="5"></Button>
+                            <Button Content="Удалить" Grid.Row="2" Margin="5"></Button>
+                            <Label Content="Имя" Grid.Column="1" Grid.Row="0"></Label>
+                            <TextBox Grid.Row="1" Grid.Column="1"  Margin="5"></TextBox>
+                            <Label Content="Участник группы" Grid.Column="1" Grid.Row="2"></Label>
+                            <TextBox Grid.Row="3" Grid.Column="1"  Margin="5"></TextBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Концерты">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="concertsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Исполнитель" Binding="{Binding NameOfArtist}"/>
+                            <DataGridTextColumn Header="Дата концерта" Binding="{Binding ConcertDate, StringFormat= d}"/>
+                            <DataGridTextColumn Header="Место проведения" Binding="{Binding ConcertPlace}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <GroupBox Header="Редактирование" Grid.Row="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button Content="Добавить" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                            <Button Content="Изменить" Grid.Column="0" Grid.Row="1" Margin="5"/>
+                            <Button Content="Удалить" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                            <Label Content="Исполнитель" Grid.Row="0" Grid.Column="1"/>
+                            <TextBox x:Name="concertArtistNameBox" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                            <Label Content="Дата проведения" Grid.Row="2" Grid.Column="1"/>
+                            <DatePicker x:Name="concertDatePicker" Grid.Column="1" Grid.Row="3" Margin="5"/>
+                            <Label Content="Место проведения" Grid.Row="4" Grid.Column="1"/>
+                            <TextBox x:Name="concertPlaceBox" Grid.Row="5" Grid.Column="1" Margin="5"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Песни">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="songsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding SongName}"/>
+                            <DataGridTextColumn Header="Текст песни" Binding="{Binding SongLyrics}"/>
+                            <DataGridTextColumn Header="Исполнитель" Binding="{Binding ArtistName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Альбомы">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="albumsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding AlbumName}"/>
+                            <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"/>
+                            <DataGridTextColumn Header="Дата выхода" Binding="{Binding ReleaseDate}"/>
+                            <DataGridTextColumn Header="Кол-во песен" Binding="{Binding SongAmount}"/>
+                            <DataGridTextColumn Header="Исполнитель" Binding="{Binding ArtistName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+
+        </TabControl>
+    </Grid>
+</Window>
