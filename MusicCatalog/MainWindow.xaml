@@ -137,7 +137,7 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="songsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                    <DataGrid SelectionChanged="songsGrid_SelectionChanged" x:Name="songsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding SongName}"/>
                             <DataGridTextColumn Header="Текст песни" Binding="{Binding SongLyrics}"/>
@@ -158,8 +158,8 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button Content="Добавить" Grid.Column="0" Grid.Row="0" Margin="5" Click="AddSong"/>
-                        <Button Content="Изменить" Grid.Column="0" Grid.Row="1" Margin="5"/>
-                        <Button Content="Удалить" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                        <Button Content="Изменить" Grid.Column="0" Grid.Row="1" Margin="5" Click="ChangeSong"/>
+                        <Button Content="Удалить" Grid.Column="0" Grid.Row="2" Margin="5" Click="DeleteSongs"/>
                         <Label Content="Название песни" Grid.Row="0" Grid.Column="1"></Label>
                         <TextBox x:Name="songNameBox" Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
                         <Label Content="Текст" Grid.Row="2" Grid.Column="1"></Label>
@@ -175,7 +175,7 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid x:Name="albumsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
+                    <DataGrid SelectionChanged="albumsGrid_SelectionChanged" x:Name="albumsGrid" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding AlbumName}"/>
                             <DataGridTextColumn Header="Жанр" Binding="{Binding Genre}"/>
@@ -198,9 +198,9 @@
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Content="Добавить" Grid.Column="0" Grid.Row="0" Margin="5"/>
-                        <Button Content="Изменить" Grid.Column="0" Grid.Row="1" Margin="5"/>
-                        <Button Content="Удалить" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                        <Button Content="Добавить" Grid.Column="0" Grid.Row="0" Margin="5" Click="AddAlbum"/>
+                        <Button Content="Изменить" Grid.Column="0" Grid.Row="1" Margin="5" Click="ChangeAlbum"/>
+                        <Button Content="Удалить" Grid.Column="0" Grid.Row="2" Margin="5" Click="DeleteAlbum"/>
                         <Label Content="Название альбома" Grid.Row="0" Grid.Column="1" Margin="5"></Label>
                         <TextBox x:Name="albumNameBox" Text="" Grid.Column="1" Grid.Row="1" Margin="5"></TextBox>
                         <Label Content="Жанр" Grid.Row="2" Grid.Column="1" Margin="5"></Label>

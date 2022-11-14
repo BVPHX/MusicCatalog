@@ -70,6 +70,28 @@ namespace MusicCatalog
                 concertDatePicker.SelectedDate = temp.ConcertDate; 
             }
         }
+        private void songsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (songsGrid.SelectedIndex != -1)
+            {
+                Songs temp = (Songs)artistsGrid.SelectedItem;
+                songNameBox.Text = temp.SongName;
+                songTextBox.Text = temp.SongLyrics;
+                songArtistBox.Text = temp.ArtistName;
+            }
+        }
+        private void albumsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (albumsGrid.SelectedIndex != -1)
+            {
+                Albums temp = (Albums)albumsGrid.SelectedItem;
+                albumNameBox.Text = temp.AlbumName;
+                albumGenreBox.Text = temp.Genre;
+                albumReleasePicker.SelectedDate = temp.ReleaseDate;
+                albumSongAmount.Text = temp.SongAmount.ToString();
+                albumArtistBox.Text = temp.ArtistName;
+            }
+        }
 
         private void AddArtist_Click(object sender, RoutedEventArgs e)
         {
@@ -231,6 +253,84 @@ namespace MusicCatalog
             db.Songs.Add(temp);
             db.SaveChanges();
             songsGrid.Items.Refresh();
+        }
+
+        private void ChangeSong(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                Songs result = (from p in db.Songs
+                                   where p.SongName == songNameBox.Text
+                                   select p).SingleOrDefault();
+
+                result.SongName = songNameBox.Text;
+                result.SongLyrics = songTextBox.Text;
+                result.ArtistName = songArtistBox.Text;
+
+                db.SaveChanges();
+                songsGrid.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("Введены некорректные данные");
+                return;
+            }
+        }
+
+        private void DeleteSongs(object sender, RoutedEventArgs e)
+        {
+            if (songsGrid.SelectedIndex != -1)
+            {
+                Songs temp = (Songs)songsGrid.SelectedItem;
+                db.Songs.Remove(temp);
+                db.SaveChanges();
+                songsGrid.Items.Refresh();
+            }
+        }
+
+        private void AddAlbum(object sender, RoutedEventArgs e)
+        {
+            Albums temp = new Albums() { ArtistName = albumArtistBox.Text, AlbumName = albumNameBox.Text, SongAmount = Convert.ToInt32(albumSongAmount.Text), Genre = albumGenreBox.Text,ReleaseDate = (DateTime)albumReleasePicker.SelectedDate };
+            db.Albums.Add(temp);
+            db.SaveChanges();
+            albumsGrid.Items.Refresh();
+        }
+
+        private void ChangeAlbum(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                Albums result = (from p in db.Albums
+                                where p.AlbumName == albumNameBox.Text
+                                select p).SingleOrDefault();
+
+                result.ArtistName = albumArtistBox.Text;
+                result.Genre = albumGenreBox.Text;
+                result.AlbumName = albumNameBox.Text;
+                result.ReleaseDate = (DateTime)albumReleasePicker.SelectedDate;
+                result.SongAmount = Convert.ToInt32(albumSongAmount.Text);
+
+                db.SaveChanges();
+                albumsGrid.Items.Refresh();
+        }
+            catch
+            {
+                MessageBox.Show("Введены некорректные данные");
+                return;
+            }
+        }
+
+        private void DeleteAlbum(object sender, RoutedEventArgs e)
+        {
+            if (albumsGrid.SelectedIndex != -1)
+            {
+                Albums temp = (Albums)albumsGrid.SelectedItem;
+                db.Albums.Remove(temp);
+                db.SaveChanges();
+                albumsGrid.Items.Refresh();
+            }
         }
     }
 }
