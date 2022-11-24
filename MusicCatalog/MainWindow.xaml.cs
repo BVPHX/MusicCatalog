@@ -57,7 +57,7 @@ namespace MusicCatalog
                 memberNameBox.Text = temp.MemberName;
                 memberGroupBox.Text = temp.GroupOfMemberName;
 
-    }
+            }
 
         }
         private void concertsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,7 +67,7 @@ namespace MusicCatalog
                 Concerts temp = (Concerts)concertsGrid.SelectedItem;
                 concertPlaceBox.Text = temp.ConcertPlace;
                 concertArtistNameBox.Text = temp.NameOfArtist;
-                concertDatePicker.SelectedDate = temp.ConcertDate; 
+                concertDatePicker.SelectedDate = temp.ConcertDate;
             }
         }
         private void songsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -249,7 +249,7 @@ namespace MusicCatalog
 
         private void AddSong(object sender, RoutedEventArgs e)
         {
-            Songs temp = new Songs() {ArtistName = songArtistBox.Text,SongName = songNameBox.Text, SongLyrics = songTextBox.Text };
+            Songs temp = new Songs() { ArtistName = songArtistBox.Text, SongName = songNameBox.Text, SongLyrics = songTextBox.Text };
             db.Songs.Add(temp);
             db.SaveChanges();
             songsGrid.Items.Refresh();
@@ -261,8 +261,8 @@ namespace MusicCatalog
             {
 
                 Songs result = (from p in db.Songs
-                                   where p.SongName == songNameBox.Text
-                                   select p).SingleOrDefault();
+                                where p.SongName == songNameBox.Text
+                                select p).SingleOrDefault();
 
                 result.SongName = songNameBox.Text;
                 result.SongLyrics = songTextBox.Text;
@@ -291,7 +291,7 @@ namespace MusicCatalog
 
         private void AddAlbum(object sender, RoutedEventArgs e)
         {
-            Albums temp = new Albums() { ArtistName = albumArtistBox.Text, AlbumName = albumNameBox.Text, SongAmount = Convert.ToInt32(albumSongAmount.Text), Genre = albumGenreBox.Text,ReleaseDate = (DateTime)albumReleasePicker.SelectedDate };
+            Albums temp = new Albums() { ArtistName = albumArtistBox.Text, AlbumName = albumNameBox.Text, SongAmount = Convert.ToInt32(albumSongAmount.Text), Genre = albumGenreBox.Text, ReleaseDate = (DateTime)albumReleasePicker.SelectedDate };
             db.Albums.Add(temp);
             db.SaveChanges();
             albumsGrid.Items.Refresh();
@@ -303,8 +303,8 @@ namespace MusicCatalog
             {
 
                 Albums result = (from p in db.Albums
-                                where p.AlbumName == albumNameBox.Text
-                                select p).SingleOrDefault();
+                                 where p.AlbumName == albumNameBox.Text
+                                 select p).SingleOrDefault();
 
                 result.ArtistName = albumArtistBox.Text;
                 result.Genre = albumGenreBox.Text;
@@ -314,7 +314,7 @@ namespace MusicCatalog
 
                 db.SaveChanges();
                 albumsGrid.Items.Refresh();
-        }
+            }
             catch
             {
                 MessageBox.Show("Введены некорректные данные");
@@ -331,6 +331,29 @@ namespace MusicCatalog
                 db.SaveChanges();
                 albumsGrid.Items.Refresh();
             }
+        }
+
+        private void concertSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            switch (concertCombo.SelectedIndex)
+            {
+                case 0:
+                    var search = db.Concerts.Where(c => c.NameOfArtist.StartsWith(concertSearchBox.Text)).ToList();
+
+                    concertsGrid.ItemsSource = search;
+                    break;
+                case 1:
+                    search = db.Concerts.Where(c => c.ConcertDate == Convert.ToDateTime(concertSearchBox.Text)).ToList();
+
+                    concertsGrid.ItemsSource = search;
+                    break;
+                case 2:
+                    search = db.Concerts.Where(c => c.ConcertPlace.StartsWith(concertSearchBox.Text)).ToList();
+
+                    concertsGrid.ItemsSource = search;
+                    break;
+            }
+
         }
     }
 }
