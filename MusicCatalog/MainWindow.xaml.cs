@@ -332,7 +332,48 @@ namespace MusicCatalog
                 albumsGrid.Items.Refresh();
             }
         }
+        private void artistSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            switch (artistsCombo.SelectedIndex)
+            {
+                case 0:
+                    var search = db.Artists.Where(c => c.ArtistOrGroupName.StartsWith(artistSearchBox.Text)).ToList();
 
+                    artistsGrid.ItemsSource = search;
+                    break;
+                case 1:
+                    search = db.Artists.Where(c => c.CareerBegin == Convert.ToDateTime(artistSearchBox.Text)).ToList();
+
+                    artistsGrid.ItemsSource = search;
+                    break;
+                case 2:
+                    search = db.Artists.Where(c => c.CareerEnd == Convert.ToDateTime(artistSearchBox.Text)).ToList();
+
+                    artistsGrid.ItemsSource = search;
+                    break;
+                case 3:
+                    search = db.Artists.Where(c => c.AlbumsNumber.ToString().StartsWith(artistSearchBox.Text)).ToList();
+
+                    artistsGrid.ItemsSource = search;
+                    break;
+            }
+        } 
+        private void membersSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            switch (membersCombo.SelectedIndex)
+            {
+                case 0:
+                    var search = db.GroupMembers.Where(c => c.MemberName.StartsWith(membersSearchBox.Text)).ToList();
+
+                    membersGrid.ItemsSource = search;
+                    break;
+                case 1:
+                    search = db.GroupMembers.Where(c => c.GroupOfMemberName.StartsWith(concertSearchBox.Text)).ToList();
+
+                    membersGrid.ItemsSource = search;
+                    break;
+            }
+        }
         private void concertSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             switch (concertCombo.SelectedIndex)
@@ -354,6 +395,60 @@ namespace MusicCatalog
                     break;
             }
 
+        }
+
+        private void songsSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            switch (membersCombo.SelectedIndex)
+            {
+                case 0:
+                    var search = db.Songs.Where(c => c.SongName.StartsWith(songsSearchBox.Text)).ToList();
+
+                    songsGrid.ItemsSource = search;
+                    break;
+                case 1:
+                    search = db.Songs.Where(c => c.SongLyrics.StartsWith(songsSearchBox.Text)).ToList();
+
+                    songsGrid.ItemsSource = search;
+                    break;
+                case 2:
+                    search = db.Songs.Where(c => c.ArtistName.StartsWith(songsSearchBox.Text)).ToList();
+
+                    songsGrid.ItemsSource = search;
+                    break;
+            }
+        }
+
+        private void albumsSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            switch (membersCombo.SelectedIndex)
+            {
+                case 0:
+                    var search = db.Albums.Where(c => c.AlbumName.StartsWith(albumsSearchBox.Text)).ToList();
+
+                    albumsGrid.ItemsSource = search;
+                    break;
+                case 1:
+                    search = db.Albums.Where(c => c.Genre.StartsWith(albumsSearchBox.Text)).ToList();
+
+                    albumsGrid.ItemsSource = search;
+                    break;
+                case 2:
+                    search = db.Albums.Where(c => c.ReleaseDate == Convert.ToDateTime(albumsSearchBox.Text)).ToList();
+
+                    albumsGrid.ItemsSource = search;
+                    break;
+                case 3:
+                    search = db.Albums.Where(c => c.SongAmount.ToString().StartsWith(albumsSearchBox.Text)).ToList();
+
+                    albumsGrid.ItemsSource = search;
+                    break;
+                case 4:
+                    search = db.Albums.Where(c => c.ArtistName.StartsWith(albumsSearchBox.Text)).ToList();
+
+                    albumsGrid.ItemsSource = search;
+                    break;
+            }
         }
     }
 }

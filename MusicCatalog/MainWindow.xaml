@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicCatalog"
         mc:Ignorable="d"
-        Title="MainWindow" Height="503" Width="800">
+        Title="Музыкальный каталог" Height="503" Width="800">
     <Grid>
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Файл"></MenuItem>
@@ -56,7 +56,7 @@
                                     <ComboBoxItem Content="Кол-во альбомов"></ComboBoxItem>
                                 </ComboBox>
                                 <Label Content="Параметр поиска:"></Label>
-                                <TextBox x:Name="artistSearchBox" Margin="5"></TextBox>
+                                <TextBox x:Name="artistSearchBox" TextChanged="artistSearchBox_TextChanged" Margin="5"></TextBox>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
@@ -105,7 +105,7 @@
                                     <ComboBoxItem Content="Группа участника"></ComboBoxItem>
                                 </ComboBox>
                                 <Label Content="Параметр поиска:"></Label>
-                                <TextBox x:Name="membersSearchBox" Margin="5"></TextBox>
+                                <TextBox x:Name="membersSearchBox" TextChanged="membersSearchBox_TextChanged" Margin="5"></TextBox>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
@@ -208,7 +208,7 @@
                                 <ComboBoxItem Content="Исполнитель"></ComboBoxItem>
                             </ComboBox>
                             <Label Content="Параметр поиска:"></Label>
-                            <TextBox x:Name="songsSearchBox" Margin="5"></TextBox>
+                            <TextBox x:Name="songsSearchBox" TextChanged="songsSearchBox_TextChanged" Margin="5"></TextBox>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -266,7 +266,7 @@
                                 <ComboBoxItem Content="Исполнитель"></ComboBoxItem>
                             </ComboBox>
                             <Label Content="Параметр поиска:"></Label>
-                            <TextBox x:Name="albumsSearchBox" Margin="5"></TextBox>
+                            <TextBox x:Name="albumsSearchBox" TextChanged="albumsSearchBox_TextChanged" Margin="5"></TextBox>
                         </StackPanel>
                     </Grid>
                 </Grid>
